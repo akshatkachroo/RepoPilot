@@ -19,13 +19,7 @@ CORS(app, supports_credentials=True)
 emotion_classifier = EmotionClassifier()
 song_recommender = SongRecommender()
 
-# Spotify client setup
-sp_oauth = SpotifyOAuth(
-    client_id=os.getenv('SPOTIFY_CLIENT_ID'),
-    client_secret=os.getenv('SPOTIFY_CLIENT_SECRET'),
-    redirect_uri=os.getenv('SPOTIFY_REDIRECT_URI'),
-    scope=os.getenv('SPOTIFY_SCOPE')
-)
+
 
 @app.route('/api/analyze-emotion', methods=['POST', 'OPTIONS'])
 def analyze_emotion():
