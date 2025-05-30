@@ -4,8 +4,7 @@ from dotenv import load_dotenv
 import os
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-from models.emotion_classifier import EmotionClassifier
-from models.song_recommender import SongRecommender
+
 
 # Load environment variables
 
