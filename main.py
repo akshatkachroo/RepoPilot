@@ -1,20 +1,3 @@
-from flask import Flask, request, jsonify
-
-
-00
-            
-        print(f"Analyzing text: {text}")
-        emotions = emotion_classifier.predict(text)
-        print(f"Analysis results: {emotions}")
-        
-        response = jsonify({
-            'emotions': [{'emotion': e, 'confidence': float(c)} for e, c in emotions]
-        })
-        return response
-        
-    except Exception as e:
-        print(f"Error in analyze_emotion: {str(e)}")
-        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/recommend-songs', methods=['POST'])
 def recommend_songs():
