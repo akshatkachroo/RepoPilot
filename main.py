@@ -1,21 +1,7 @@
 from flask import Flask, request, jsonify
 
 
-
-
-@app.route('/api/analyze-emotion', methods=['POST', 'OPTIONS'])
-def analyze_emotion():
-    """Analyze text and return emotion classification."""
-    if request.method == 'OPTIONS':
-        return jsonify({'status': 'ok'})
-
-    try:
-        data = request.geted'}), 400
-            
-        text = data.get('text')
-        if not text:
-            print("No text field in request data")
-            return jsonify({'error': 'No text provided'}), 400
+00
             
         print(f"Analyzing text: {text}")
         emotions = emotion_classifier.predict(text)
