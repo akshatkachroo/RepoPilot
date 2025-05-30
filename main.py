@@ -10,10 +10,7 @@ def analyze_emotion():
         return jsonify({'status': 'ok'})
 
     try:
-        data = request.get_json()
-        if not data:
-            print("No JSON data received")
-            return jsonify({'error': 'No data provided'}), 400
+        data = request.geted'}), 400
             
         text = data.get('text')
         if not text:
