@@ -8,16 +8,7 @@ from models.emotion_classifier import EmotionClassifier
 from models.song_recommender import SongRecommender
 
 # Load environment variables
-load_dotenv()
 
-app = Flask(__name__)
-
-# Simple CORS configuration
-CORS(app, supports_credentials=True)
-
-# Initialize models
-emotion_classifier = EmotionClassifier()
-song_recommender = SongRecommender()
 
 
 
