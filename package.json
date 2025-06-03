@@ -1,0 +1,28 @@
+{
+  "name": "gh-workflow-helper",
+  "version": "1.0.0",
+  "description": "GitHub workflow automation tool with webhook server and CLI",
+  "main": "src/index.js",
+  "bin": {
+    "gh-workflow-helper": "./src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "setup": "node src/setup.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["github", "workflow", "automation", "cli", "issues", "pull-requests"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.7",
+    "chalk": "^4.1.2",
+    "commander": "^12.0.0",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+} 
