@@ -51,7 +51,8 @@ if (process.argv.length <= 2) {
     process.env.GITHUB_OWNER,
     process.env.GITHUB_REPO,
     process.env.SLACK_WEBHOOK_URL,
-    reviewers
+    reviewers,
+    process.env.GEMINI_API_KEY
   );
   webhookServer.start();
 } else {

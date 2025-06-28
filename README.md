@@ -21,15 +21,17 @@ npm install
    - Select scopes: `repo`, `workflow`
    - Copy the generated token
 
-4. Create a `.env` file in the project root:
-```env
-GITHUB_TOKEN=your_github_personal_access_token
-GITHUB_OWNER=your_github_username_or_org
-GITHUB_REPO=your_repository_name
-WEBHOOK_SECRET=any_random_string_for_security
+4. (Optional) Create a Google Gemini API key for AI-powered PR summaries:
+   - Go to [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - Create a new API key
+   - Copy the generated key
+
+5. Run the setup wizard:
+```bash
+npm run setup
 ```
 
-5. Run the CLI:
+6. Run the CLI:
 ```bash
 npm start list-issues  # List all open issues
 ```
@@ -39,9 +41,10 @@ npm start list-issues  # List all open issues
 - 📝 Create and manage GitHub issues from the command line
 - 🔄 Automatic reviewer assignment
 - 📊 List and filter issues and pull requests
-- 🔔 Slack notifications for merged PRs
+- 🔔 Slack notifications for merged PRs with AI-powered summaries
 - 🤖 Command parsing in issue comments
 - 🌐 Webhook server for GitHub events
+- 🧠 Google Gemini AI integration for intelligent PR analysis
 
 ## CLI Commands
 
@@ -98,6 +101,45 @@ The webhook server automatically:
 1. Assigns reviewers to new issues and PRs using round-robin selection
 2. Adds "needs-review" label to new PRs
 3. Sends Slack notifications when PRs are merged
+4. **NEW**: Generates AI-powered summaries of merged PRs using Google Gemini
+
+## AI-Powered PR Summaries
+
+When a pull request is merged, the system can automatically generate a concise summary using Google Gemini AI. The summary includes:
+- What the PR accomplished
+- Potential impact on the codebase
+- Key changes and their significance
+
+To enable this feature:
+1. Get a Google Gemini API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Add `GEMINI_API_KEY=your_api_key` to your `.env` file
+3. The AI summary will be included in Slack notifications
+
+Example Slack notification with AI summary:
+```
+🎉 PR #123 "Add user authentication" has been merged!
+Author: john_doe
+URL: https://github.com/org/repo/pull/123
+
+🤖 AI Summary:
+This PR implements user authentication using JWT tokens. It adds login/logout functionality, 
+password hashing, and session management. The changes improve security and user experience 
+by providing proper authentication flow.
+```
+
+## Environment Variables
+
+Required:
+- `GITHUB_TOKEN` - Your GitHub Personal Access Token
+- `GITHUB_OWNER` - Your GitHub username or organization
+- `GITHUB_REPO` - Your repository name
+- `WEBHOOK_SECRET` - Secret for webhook verification
+
+Optional:
+- `WEBHOOK_PORT` - Port for webhook server (default: 3000)
+- `REVIEWERS` - Comma-separated list of GitHub usernames for automatic assignment
+- `SLACK_WEBHOOK_URL` - Slack webhook URL for PR merge notifications
+- `GEMINI_API_KEY` - Google Gemini API key for AI-powered PR summaries
 
 ## Development
 
@@ -106,7 +148,10 @@ The webhook server automatically:
    ```bash
    npm install
    ```
-3. Create `.env` file with required variables
+3. Run the setup wizard:
+   ```bash
+   npm run setup
+   ```
 4. Run the development server:
    ```bash
    npm start
@@ -119,3 +164,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## License
 
 MIT 
+

@@ -45,6 +45,12 @@ const questions = [
     message: 'Enter Slack webhook URL for PR merge notifications (optional): ',
     validate: (input) => true,
     required: false
+  },
+  {
+    name: 'geminiApiKey',
+    message: 'Enter your Google Gemini API key for AI-powered PR summaries (optional): ',
+    validate: (input) => true,
+    required: false
   }
 ];
 
@@ -86,6 +92,7 @@ WEBHOOK_SECRET=${webhookSecret}
 WEBHOOK_PORT=${answers.webhookPort}
 ${answers.reviewers ? `REVIEWERS=${answers.reviewers}  # Comma-separated list of GitHub usernames` : ''}
 ${answers.slackWebhookUrl ? `SLACK_WEBHOOK_URL=${answers.slackWebhookUrl}  # For PR merge notifications` : ''}
+${answers.geminiApiKey ? `GEMINI_API_KEY=${answers.geminiApiKey}  # For AI-powered PR summaries` : ''}
 `;
 
   fs.writeFileSync(path.join(process.cwd(), '.env'), envContent);
@@ -106,6 +113,10 @@ ${answers.slackWebhookUrl ? `SLACK_WEBHOOK_URL=${answers.slackWebhookUrl}  # For
   
   if (answers.slackWebhookUrl) {
     console.log('\n✅ Slack notifications enabled for PR merges');
+  }
+
+  if (answers.geminiApiKey) {
+    console.log('\n✅ AI-powered PR summaries enabled with Google Gemini');
   }
 
   rl.close();

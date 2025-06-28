@@ -2,9 +2,10 @@ const express = require('express');
 const crypto = require('crypto');
 const axios = require('axios');
 const GitHubAPI = require('./github');
+const GeminiAI = require('./gemini');
 
 class WebhookServer {
-  constructor(port, webhookSecret, githubToken, owner, repo, slackWebhookUrl, reviewers) {
+  constructor(port, webhookSecret, githubToken, owner, repo, slackWebhookUrl, reviewers, geminiApiKey) {
     this.port = port;
     this.webhookSecret = webhookSecret;
     this.github = new GitHubAPI(githubToken, owner, repo);
@@ -12,6 +13,7 @@ class WebhookServer {
     console.log('Slack webhook URL configured:', this.slackWebhookUrl ? 'Yes' : 'No');
     this.reviewers = reviewers;
     this.currentReviewerIndex = 0;
+    this.gemini = new GeminiAI(geminiApiKey);
     this.app = express();
     this.setupMiddleware();
     this.setupRoutes();
@@ -127,8 +129,27 @@ class WebhookServer {
       return;
     }
 
+    // Generate AI summary
+    let aiSummary = '';
+    try {
+      const prData = {
+        title: pr.title,
+        body: pr.body,
+        changed_files: pr.changed_files,
+        additions: pr.additions,
+        deletions: pr.deletions
+      };
+      
+      aiSummary = await this.gemini.generatePRSummary(prData);
+      if (aiSummary) {
+        console.log('Generated AI summary:', aiSummary);
+      }
+    } catch (error) {
+      console.error('Error generating AI summary:', error);
+    }
+
     const message = {
-      text: `🎉 PR #${pr.number} "${pr.title}" has been merged!\nAuthor: ${pr.user.login}\nURL: ${pr.html_url}`
+      text: `🎉 PR #${pr.number} "${pr.title}" has been merged!\nAuthor: ${pr.user.login}\nURL: ${pr.html_url}${aiSummary ? `\n\n🤖 AI Summary:\n${aiSummary}` : ''}`
     };
 
     try {
