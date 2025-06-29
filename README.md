@@ -1,4 +1,4 @@
-# GitHub Workflow Helper
+# RepoPilot
 
 A Node.js CLI tool and webhook server to help software teams manage GitHub issues and pull requests with automation. Perfect for open source projects and team collaboration.
 
