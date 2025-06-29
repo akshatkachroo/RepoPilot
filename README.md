@@ -47,28 +47,3 @@ npm start list-prs
 ```bash
 npm start assign-reviewers --pr 123 --reviewers user1,user2
 ```
-
-## Development
-
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Run the setup wizard:
-   ```bash
-   npm run setup
-   ```
-4. Run the development server:
-   ```bash
-   npm start
-   ```
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-MIT 
-
